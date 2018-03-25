@@ -7,8 +7,6 @@ import reactor.core.publisher.Flux;
 import us.pomorscy.spring.reactive.netflux.domain.Movie;
 import us.pomorscy.spring.reactive.netflux.repositories.MovieRepository;
 
-import java.util.UUID;
-
 @Slf4j
 @Component
 public class BootstrapCLR implements CommandLineRunner {
@@ -33,7 +31,7 @@ public class BootstrapCLR implements CommandLineRunner {
                 "Pulp Fiction",
                 "The Good, the Bad and the Ugly",
                 "FightClub")
-                .map(title -> new Movie(title, UUID.randomUUID().toString()))
+                .map(Movie::new)
                 .flatMap(movieRepository::save))
         .subscribe(c -> {
         }, e -> {
